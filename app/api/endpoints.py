@@ -1,19 +1,17 @@
 from fastapi import APIRouter, HTTPException, Security
 from fastapi.security import HTTPAuthorizationCredentials
 from typing import Optional, Dict, Any
-from ..utils.language_stats import get_language_resume
+from app.utils.language_stats import get_language_resume
 import httpx
 import uuid
 
-from ..utils.dependencies import bearer_scheme, build_headers, extract_token
+from app.settings import settings
+from app.utils.dependencies import bearer_scheme, build_headers, extract_token
 
 router = APIRouter(
     prefix="/stats",
     tags=["stats"],
 )
-
-GITHUB_API_URL = "https://api.github.com/users/"
-GITHUB_GRAPHQL_URL = "https://api.github.com/graphql"
 
 
 @router.get("/user/{username}")
@@ -26,7 +24,7 @@ async def get_github_user(
     token = extract_token(credentials)
     headers = build_headers(token)
     async with httpx.AsyncClient(timeout=15) as client:
-        resp = await client.get(f"{GITHUB_API_URL}{username}", headers=headers)
+        resp = await client.get(f"{settings.github_api_url}{username}", headers=headers)
         if resp.status_code == 404:
             raise HTTPException(status_code=404, detail="User not found")
         if resp.status_code != 200:
@@ -52,6 +50,8 @@ async def get_graphql_user_data(
         query($login: String!) {
           user(login: $login) {
             name
+            login
+            avatarUrl
             repositories(first: 50, orderBy: {field: STARGAZERS, direction: DESC}, isFork: false, isArchived:false, privacy: PUBLIC) {
               nodes {
                 name
@@ -74,7 +74,7 @@ async def get_graphql_user_data(
 
     async with httpx.AsyncClient(timeout=15) as client:
         resp = await client.post(
-            GITHUB_GRAPHQL_URL, headers=headers, json=body
+            settings.github_graphql_url, headers=headers, json=body
         )
 
         if resp.status_code != 200:
@@ -87,15 +87,16 @@ async def get_graphql_user_data(
 
         if data["data"]["user"] is None:
             raise HTTPException(status_code=400, detail="user not found")
-        
 
         resp = {
             "id": uuid.uuid4(),
-            "username": username, 
-            "stack": get_language_resume(data["data"]["user"])
+            "username": username,
+            "avatar_url": data["data"]["user"]["avatarUrl"],
+            "stack": get_language_resume(data["data"]["user"]),
         }
 
         return resp
+
 
 @router.get(
     "/debug/token"
