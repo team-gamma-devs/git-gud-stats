@@ -1,11 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import stats
 from fastapi.openapi.utils import get_openapi
 
+from authlib.integrations.starlette_client import OAuth
+from app.api.endpoints import router
+from app.settings import settings
+
+
 def create_app():
-    app = FastAPI()
-    
+    app = FastAPI(debug=settings.debug)
+
     origins = [
         "http://localhost:5173",
     ]
@@ -17,9 +21,9 @@ def create_app():
         allow_methods=["*"],
         allow_headers=["*"],
     )
-    
-    app.include_router(stats.router)
-    
+
+    app.include_router(router)
+
     @app.get("/")
     async def root():
         return {"message": "Welcome to Git Gud Stats"}
@@ -50,5 +54,15 @@ def create_app():
         return schema
 
     app.openapi = custom_openapi
-    
+
+    oauth = OAuth()
+    oauth.register(
+        name='oidc',
+        authority=settings.oidc_authority,
+        client_id=settings.oidc_client_id,
+        client_secret=settings.oidc_client_secret,
+        server_metadata_url=settings.oidc_server_metadata_url,
+        client_kwargs={'scope': settings.oidc_scope}
+    )
+
     return app
