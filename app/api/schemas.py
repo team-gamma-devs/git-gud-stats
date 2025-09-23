@@ -10,7 +10,7 @@ class UserDataResponse(BaseModel):
     id: str
     username: str
     avatar_url: str = Field(..., alias="avatarUrl")
-    stack: List[dict]
+    stack: List[StackItem]
 
     class Config:
         populate_by_name = True
