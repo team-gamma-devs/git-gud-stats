@@ -1,8 +1,0 @@
-fastapi[standard]
-uvicorn
-httpx
-pydantic
-pydantic-settings
-authlib
-werkzeug
-requests
