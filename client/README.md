@@ -41,6 +41,7 @@ You can preview the production build with `npm run preview`.
 ### Index:
 
 1) [Theme Subscribable](#Theme_Subscribable)
+2) [AuthBox Component](#AuthBox_Component)
 
 ## Theme Subscribable
 
@@ -70,6 +71,14 @@ Example (Tailwind token usage)
   Theme is {$theme}
 </div>
 ```
+
+## AuthBox Component
+
+A reusable authentication component that provides GitHub OAuth login functionality with a clean, responsive design.
+
+- **Location:** `src/lib/components/AuthBox.svelte`
+- **Dependencies:** Flowbite Svelte components
+- **Store Integration:** Uses `isAuth` store from `src/lib/stores/auth.ts`
 
 ## Constants
 
