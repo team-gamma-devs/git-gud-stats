@@ -11,33 +11,35 @@
 [![federico-paganini](https://img.shields.io/badge/Federico_Paganini-181717?style=for-the-badge&logo=github)](https://github.com/federico-paganini)
 [![Martin-DMC](https://img.shields.io/badge/Martin_Marrero-181717?style=for-the-badge&logo=github)](https://github.com/Martin-DMC)
 
-
 Start Developing:
 
-1) Create your virtual environment.
+1. Create your virtual environment.
 
-2) Install FastAPI dependencies:
+2. Install FastAPI dependencies:
+
 ```bash
-(venv) $ pip install -r requirements.txt
+(venv) $ pip3 install -e .
 ```
 
-3) Set up your GH Token in an .env
+3. Set up your GH Token in an .env
+
 ```py
 GITHUB_TOKEN=<Your token>
 ```
 
-4) Run the FastAPI server:
+4. Run the FastAPI server:
+
 ```bash
 # Navigate to app/
 (venv) $ fastapi dev main.py
 ```
 
-5) Run the Vite server:
+5. Run the Vite server:
+
 ```bash
 # Navigate to client/
 (venv) $ npm run dev
 ```
-
 
 # About `git-gud-stats`
 
@@ -59,17 +61,16 @@ The long-term vision is to evolve this service into a fully-fledged **GitHub App
 
 The project is built with a modern, asynchronous Python stack, chosen for its performance and developer-friendly features:
 
-*   **[FastAPI](https://fastapi.tiangolo.com/):** A modern, fast (high-performance) web framework for building APIs with Python.
-*   **[Uvicorn](https://www.uvicorn.org/):** A lightning-fast ASGI server, used to run the FastAPI application.
-*   **[HTTPX](https://www.python-httpx.org/):** A fully featured asynchronous HTTP client for making requests to the GitHub API.
-*   **[Python-dotenv](https://pypi.org/project/python-dotenv/):** A library for managing environment variables, used here to securely load the `GITHUB_TOKEN`.
+- **[FastAPI](https://fastapi.tiangolo.com/):** A modern, fast (high-performance) web framework for building APIs with Python.
+- **[Uvicorn](https://www.uvicorn.org/):** A lightning-fast ASGI server, used to run the FastAPI application.
+- **[HTTPX](https://www.python-httpx.org/):** A fully featured asynchronous HTTP client for making requests to the GitHub API.
+- **[Python-dotenv](https://pypi.org/project/python-dotenv/):** A library for managing environment variables, used here to securely load the `GITHUB_TOKEN`.
 
 ## Current Features
 
 The API currently provides two main endpoints to gather user statistics:
 
-*   `GET /user/{username}`: Fetches basic public user information from the GitHub REST API.
-*   `GET /graphql-user/{username}`: Executes a GraphQL query to get the user's name and their 5 most recently pushed repositories, including the top languages used in each.
+- `GET /user/{username}`: Fetches basic public user information from the GitHub REST API.
+- `GET /graphql-user/{username}`: Executes a GraphQL query to get the user's name and their 5 most recently pushed repositories, including the top languages used in each.
 
 It also includes a CORS middleware to allow requests from a local development server (like a Svelte or React frontend) and a simple, secure token authentication system that prioritizes a `Bearer` token from the request header before falling back to an environment variable for development.
-
