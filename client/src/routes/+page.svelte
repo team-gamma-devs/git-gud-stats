@@ -2,9 +2,12 @@
     // import { theme } from '$lib/stores/theme';
     // import { Sidebar } from "$lib/Sidebar.svelte";
     import PieChart from "$lib/components/PieChart.svelte";
+    import AuthBox from "$lib/components/AuthBox.svelte";
 </script>
 
-<PieChart/>
+<AuthBox>
+    <PieChart />
+</AuthBox>
 <!-- 
 <style>
     /* #main-wrapper {
