@@ -16,7 +16,8 @@
   import logoDark from "$lib/assets/GitGudStats_logo_dark.svg";
   import logoLight from "$lib/assets/GitGudStats_logo_light.svg";
 
-  import { isAuth } from "./stores/auth";
+  import { isAuth } from "../stores/auth";
+  import LoginForm from "./LoginForm.svelte";
 </script>
 
 <Navbar class="bg-header-bg">
@@ -38,9 +39,12 @@
     <div class="flex items-center md:order-2 hover:cursor-pointer">
       <!-- <Avatar id="avatar-menu" src="/user_pfp.jpeg" class="hover:cursor-pointer"/> -->
       <Avatar
-      id="avatar-menu"
-      src="https://media.licdn.com/dms/image/v2/D4D03AQEKpb81QDXHgA/profile-displayphoto-shrink_200_200/B4DZTWbbvcGkAc-/0/1738764305144?e=2147483647&v=beta&t=uwplIo_d4M5Ho0q3udJV5LJ7UbzigeT8zyRthdKEQ9M"
-      border size="sm" class="focus:ring-primary-500 dark:focus:ring-primary-500 dark:bg-black" />
+        id="avatar-menu"
+        src="https://media.licdn.com/dms/image/v2/D4D03AQEKpb81QDXHgA/profile-displayphoto-shrink_200_200/B4DZTWbbvcGkAc-/0/1738764305144?e=2147483647&v=beta&t=uwplIo_d4M5Ho0q3udJV5LJ7UbzigeT8zyRthdKEQ9M"
+        border
+        size="sm"
+        class="focus:ring-primary-500 dark:focus:ring-primary-500 dark:bg-black"
+      />
       <Dropdown placement="bottom" triggeredBy="#avatar-menu">
         <DropdownHeader class="hover:cursor-pointer">
           <span class="block text-sm">Pepe Gutierrez</span>
@@ -57,7 +61,9 @@
     </div>
   {/if}
   {#if !$isAuth}
-    <a href="/login"> <Button outline>LOGIN</Button></a>
+    <a href="/login" aria-label="Login With GitHub"
+      ><Button outline class="cursor-pointer">LOGIN</Button></a
+    >
   {/if}
 
   <!-- From here to bottom are some useful stuff for maybe later -->

@@ -3,11 +3,9 @@ import os
 
 class BaseSettingsClass(BaseSettings):
     github_token: str
-
     # URLs with default vaules.
     github_api_url: str = "https://api.github.com/users/"
     github_graphql_url: str = "https://api.github.com/graphql"
-
     # Cognito
     oidc_authority: str
     oidc_client_id: str
