@@ -5,7 +5,7 @@
 </script>
 
 <PieChart/>
-
+<!-- 
 <style>
     /* #main-wrapper {
         display: flex;
@@ -13,4 +13,4 @@
         justify-content: center;
         outline: 1px solid red;
     } */
-</style>
+</style> -->
