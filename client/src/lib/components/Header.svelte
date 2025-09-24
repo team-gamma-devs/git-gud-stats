@@ -16,7 +16,7 @@
   import logoDark from "$lib/assets/GitGudStats_logo_dark.svg";
   import logoLight from "$lib/assets/GitGudStats_logo_light.svg";
 
-  import { isAuth } from "./stores/auth";
+  import { isAuth } from "../stores/auth";
 </script>
 
 <Navbar class="bg-header-bg">
@@ -57,7 +57,7 @@
     </div>
   {/if}
   {#if !$isAuth}
-    <a href="/login"> <Button outline>LOGIN</Button></a>
+    <Button outline class="cursor-pointer">LOGIN</Button>
   {/if}
 
   <!-- From here to bottom are some useful stuff for maybe later -->

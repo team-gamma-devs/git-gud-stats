@@ -1,7 +1,7 @@
 <script lang="ts">
     // import { theme } from '$lib/stores/theme';
     // import { Sidebar } from "$lib/Sidebar.svelte";
-    import PieChart from "$lib/PieChart.svelte";
+    import PieChart from "$lib/components/PieChart.svelte";
 </script>
 
 <PieChart/>
