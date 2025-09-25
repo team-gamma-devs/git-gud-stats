@@ -6,12 +6,8 @@ class BaseSettingsClass(BaseSettings):
     # URLs with default vaules.
     github_api_url: str = "https://api.github.com/users/"
     github_graphql_url: str = "https://api.github.com/graphql"
-    # Cognito
-    oidc_authority: str
-    oidc_client_id: str
-    oidc_client_secret: str
-    oidc_server_metadata_url: str
-    oidc_scope: str
+    client_id: str
+    client_secret: str
 
     class Config:
         env_file = ".env"
