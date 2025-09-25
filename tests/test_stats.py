@@ -8,9 +8,10 @@ from starlette import status
 from fastapi.security.http import HTTPAuthorizationCredentials
 
 from app.main import app
-from app.routers.stats import GITHUB_API_URL
-from app.routers.stats import GITHUB_GRAPHQL_URL
+from app.settings import settings
 
+GITHUB_API_URL = settings.github_api_url
+GITHUB_GRAPHQL_URL = settings.github_graphql_url
 
 client = TestClient(app)
 
