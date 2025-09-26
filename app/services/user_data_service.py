@@ -1,7 +1,30 @@
 from app.infraestructure.github.client import GithubClient
 from app.infraestructure.github.queries import GET_USER_DATA
 
+"""
+Service for fetching and processing user data from GitHub.
 
+Classes:
+    UserDataService: Provides methods to fetch user data and summarize programming language usage.
+
+Methods:
+    __init__(github_client: GithubClient)
+        Initializes the service with a GitHub client.
+
+    async fetch_user_data(username: str) -> dict
+        Fetches user data from GitHub for the specified username.
+
+    get_language_resume(payload: dict) -> list[dict]
+        Summarizes the total size of code written in each programming language across the user's repositories.
+
+Args:
+    github_client (GithubClient): An instance of the GitHub client used to execute queries.
+    username (str): The GitHub username to fetch data for.
+    payload (dict): The user data payload containing repository and language information.
+
+    dict: User data fetched from GitHub.
+    list[dict]: A list of dictionaries, each containing a language and its total size, sorted by size in descending order.
+"""
 class UserDataService:
     def __init__(self, github_client: GithubClient):
         self.github_client = github_client

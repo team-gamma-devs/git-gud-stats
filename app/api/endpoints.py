@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, Security
 from fastapi.security import HTTPAuthorizationCredentials
 from typing import Optional, Dict, Any
 from app.utils.language_stats import get_language_resume
+from .schemas import UserDataResponse
 import httpx
 import uuid
 
@@ -32,7 +33,7 @@ async def get_github_user(
         return resp.json()
 
 
-@router.get("/graphql-user/{username}")
+@router.get("/graphql-user/{username}", response_model=UserDataResponse)
 async def get_graphql_user_data(
     username: str,
     credentials: Optional[HTTPAuthorizationCredentials] = Security(

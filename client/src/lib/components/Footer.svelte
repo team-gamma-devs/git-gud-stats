@@ -21,7 +21,7 @@
         </h2>
         <FooterLinkGroup>
           <FooterLink class="mb-4" href="/">Flowbite</FooterLink>
-          <FooterLink class="mb-4" href="/">Tailwind CSS</FooterContinue wokring on the fuciing pie chart!Link>
+          <FooterLink class="mb-4" href="/">Tailwind CSS</FooterLink> <!-- Continue wokring on the fuciing pie chart! -->
         </FooterLinkGroup>
       </div>
       <div>

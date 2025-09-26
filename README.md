@@ -17,26 +17,25 @@ Start Developing:
 1) Create your virtual environment.
 
 2) Install FastAPI dependencies:
-```bash
-(venv) $ pip install -r requirements.txt
-```
+    ```bash
+    (venv) $ pip3 install -e .
+    ```
 
 3) Set up your GH Token in an .env
-```py
-GITHUB_TOKEN=<Your token>
-```
+    ```py
+    GITHUB_TOKEN=<Your token>
+    ```
 
 4) Run the FastAPI server:
-```bash
-# Navigate to app/
-(venv) $ fastapi dev main.py
-```
+    ```bash
+    (venv) $ uvicorn app.main:app --reload
+    ```
 
 5) Run the Vite server:
-```bash
-# Navigate to client/
-(venv) $ npm run dev
-```
+    ```bash
+    # Navigate to client/
+    (venv) $ npm run dev
+    ```
 
 
 # About `git-gud-stats`
@@ -72,4 +71,3 @@ The API currently provides two main endpoints to gather user statistics:
 *   `GET /graphql-user/{username}`: Executes a GraphQL query to get the user's name and their 5 most recently pushed repositories, including the top languages used in each.
 
 It also includes a CORS middleware to allow requests from a local development server (like a Svelte or React frontend) and a simple, secure token authentication system that prioritizes a `Bearer` token from the request header before falling back to an environment variable for development.
-

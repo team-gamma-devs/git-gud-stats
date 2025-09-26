@@ -3,7 +3,7 @@
   import { Chart } from "@flowbite-svelte-plugins/chart";
   import { Card, A, Button, Dropdown, DropdownItem, Popover } from "flowbite-svelte";
   import { InfoCircleSolid, ChevronDownOutline, ChevronRightOutline, PenSolid, DownloadSolid, ShareNodesSolid, TrashBinSolid, DotsHorizontalOutline } from "flowbite-svelte-icons";
-  import { langColors } from "./constants/langColors";
+  import { langColors } from "../constants/langColors";
 
   let userData = {
     "id": 123213,
