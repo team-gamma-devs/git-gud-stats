@@ -22,4 +22,4 @@ class ProductionSettings(BaseSettingsClass):
 
 # Select class depends of the env.
 env = os.getenv("ENV", "development")
-settings = DevelopmentSettings() if env == "development" else ProductionSettings()
+settings = DevelopmentSettings() if env == "development" else ProductionSettings() # type: ignore
