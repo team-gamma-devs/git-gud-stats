@@ -1,4 +1,6 @@
-#!/home/gabo/git-gud-stats/venv/bin/python3
+#!/bin/sh
+'''exec' "/home/gabriel/Desktop/Tema Gamma/git-gud-stats/venv/bin/python3" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -8,6 +8,7 @@ class BaseSettingsClass(BaseSettings):
     github_graphql_url: str = "https://api.github.com/graphql"
     client_id: str
     client_secret: str
+    app_name: str
 
     class Config:
         env_file = ".env"
