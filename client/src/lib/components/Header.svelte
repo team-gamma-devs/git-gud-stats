@@ -17,7 +17,7 @@
   import logoLight from "$lib/assets/GitGudStats_logo_light.svg";
 
   import { isAuth } from "../stores/auth";
-  import LoginForm from "./LoginForm.svelte";
+  import GitHubLoginBtn from "./GitHubLoginBtn.svelte";
 </script>
 
 <Navbar class="bg-header-bg">
@@ -61,9 +61,7 @@
     </div>
   {/if}
   {#if !$isAuth}
-    <a href="/login" aria-label="Login With GitHub"
-      ><Button outline class="cursor-pointer">LOGIN</Button></a
-    >
+    <GitHubLoginBtn />
   {/if}
 
   <!-- From here to bottom are some useful stuff for maybe later -->
