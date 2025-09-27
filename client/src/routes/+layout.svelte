@@ -34,6 +34,7 @@
 		href={favicon_dark}
 		media="(prefers-color-scheme: dark)"
 	/>
+	<!-- svelte-ignore hydration_attribute_changed -->
 	<link rel="icon" type="image/svg+xml" href={currentFavicon} />
 </svelte:head>
 <div class="layout-container">

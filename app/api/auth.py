@@ -9,7 +9,7 @@ CLIENT_ID = settings.client_id
 CLIENT_SECRET = settings.client_secret
 CLIENT_URL = f"https://github.com/login/oauth/authorize?client_id={CLIENT_ID}"
 REDIRECT_URI = "http://localhost:8000/auth/callback"
-FRONTEND_URL = "http://localhost:5173/"
+FRONTEND_URL = "http://localhost:5173"
 
 
 router = APIRouter(prefix="/auth", tags=["auth"])
