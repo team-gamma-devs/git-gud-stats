@@ -9,7 +9,7 @@ CLIENT_ID = settings.client_id
 CLIENT_SECRET = settings.client_secret
 CLIENT_URL = f"https://github.com/login/oauth/authorize?client_id={CLIENT_ID}"
 REDIRECT_URI = "http://localhost:8000/auth/callback"
-FRONTEND_URL = "http://localhost:5173/"
+FRONTEND_URL = "http://localhost:5173"
 
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -28,6 +28,9 @@ async def github_app_login():
     )
     return RedirectResponse(url=auth_url)
 
+
+
+# Might reformar this into parse_response 
 @router.get("/callback")
 async def github_app_callback(
     code: Optional[str] = Query(None), # <- this is the code you need to in order to create the JWT.
