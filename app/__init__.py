@@ -4,6 +4,8 @@ from fastapi.openapi.utils import get_openapi
 
 from authlib.integrations.starlette_client import OAuth
 from app.api.endpoints import router
+from .api import endpoints
+from .api import auth
 from app.settings import settings
 
 
@@ -22,7 +24,8 @@ def create_app():
         allow_headers=["*"],
     )
 
-    app.include_router(router)
+    app.include_router(endpoints.router, prefix="/api")
+    app.include_router(auth.router)
 
     @app.get("/")
     async def root():
@@ -55,14 +58,14 @@ def create_app():
 
     app.openapi = custom_openapi
 
-    oauth = OAuth()
-    oauth.register(
-        name='oidc',
-        authority=settings.oidc_authority,
-        client_id=settings.oidc_client_id,
-        client_secret=settings.oidc_client_secret,
-        server_metadata_url=settings.oidc_server_metadata_url,
-        client_kwargs={'scope': settings.oidc_scope}
-    )
+    # oauth = OAuth()
+    # oauth.register(
+    #     name='oidc',
+    #     authority=settings.oidc_authority,
+    #     client_id=settings.oidc_client_id,
+    #     client_secret=settings.oidc_client_secret,
+    #     server_metadata_url=settings.oidc_server_metadata_url,
+    #     client_kwargs={'scope': settings.oidc_scope}
+    # )
 
     return app
