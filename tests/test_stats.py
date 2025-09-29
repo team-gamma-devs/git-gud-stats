@@ -9,9 +9,12 @@ from fastapi.security.http import HTTPAuthorizationCredentials
 
 from app.main import app
 from app.settings import settings
+from app.infraestructure.github.queries import GET_USER_DATA
 
 GITHUB_API_URL = settings.github_api_url
 GITHUB_GRAPHQL_URL = settings.github_graphql_url
+query = GET_USER_DATA
+
 
 client = TestClient(app)
 
@@ -62,34 +65,13 @@ def test_get_github_user_api_error(auth_header):
 def test_github_graphql_user_success(auth_header): 
     username = "testuser"
 
-    query = """
-        query($login: String!) {
-          user(login: $login) {
-            name
-            repositories(first: 50, orderBy: {field: STARGAZERS, direction: DESC}, isFork: false, isArchived:false, privacy: PUBLIC) {
-              nodes {
-                name
-                diskUsage
-                languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
-                  edges {
-                    size
-                    node {
-                      name
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-    """
-    body_for_github_api = {"query": query, "variables": {"login": username}}
-
-    respx.post(GITHUB_GRAPHQL_URL, json=body_for_github_api).mock(
+    respx.post(GITHUB_GRAPHQL_URL).mock(
         return_value=Response(status.HTTP_200_OK, json={
             "data": {
                 "user": {
                     "name": "testuser",
+                    "login": username,
+                    "avatarUrl": "https://test.com/avatar.png",
                     "repositories": {
                         "nodes": []
                     }
@@ -108,30 +90,7 @@ def test_github_graphql_user_success(auth_header):
 def test_github_graphql_user_not_found(auth_header): 
     username = "userNotFound"
 
-    query = """
-        query($login: String!) {
-          user(login: $login) {
-            name
-            repositories(first: 50, orderBy: {field: STARGAZERS, direction: DESC}, isFork: false, isArchived:false, privacy: PUBLIC) {
-              nodes {
-                name
-                diskUsage
-                languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
-                  edges {
-                    size
-                    node {
-                      name
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-    """
-    body_for_github_api = {"query": query, "variables": {"login": username}}
-
-    respx.post(GITHUB_GRAPHQL_URL, json=body_for_github_api).mock(
+    respx.post(GITHUB_GRAPHQL_URL).mock(
         return_value=Response(status.HTTP_200_OK, json={
             "data": {
                 "user": None
@@ -147,31 +106,8 @@ def test_github_graphql_user_not_found(auth_header):
 @respx.mock
 def test_github_graphql_data_error(auth_header): 
     username = "testuser"
-    
-    query = """
-        query($login: String!) {
-          user(login: $login) {
-            name
-            repositories(first: 50, orderBy: {field: STARGAZERS, direction: DESC}, isFork: false, isArchived:false, privacy: PUBLIC) {
-              nodes {
-                name
-                diskUsage
-                languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
-                  edges {
-                    size
-                    node {
-                      name
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-    """
-    body_for_github_api = {"query": query, "variables": {"login": username}}
-    
-    respx.post(GITHUB_GRAPHQL_URL, json=body_for_github_api).mock(
+
+    respx.post(GITHUB_GRAPHQL_URL).mock(
         return_value=Response(status.HTTP_200_OK, json={
             "data": None,
             "errors": [
